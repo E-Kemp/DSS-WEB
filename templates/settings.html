@@ -1,0 +1,24 @@
+{% extends "layout/template.html" %}
+{% block title %}Settings{% endblock %}
+{% block extraParams %}col-4{% endblock %}
+{% block content %}
+    <h1>User Settings</h1>
+    <div class="alert alert-warning">
+        <strong>Warning!</strong> There is no database API.<br>There's no settings to display!!
+    </div>
+    <form action="{{ url_for('settings') }}" method="post">
+        <div class="form-group">
+            <label for="oldPasswordInput">Old Password</label>
+            <input type="password" class="form-control" name="oldPasswordInput">
+        </div>
+        <div class="form-group">
+            <label for="newPasswordInput">New Password</label>
+            <input type="password" class="form-control" name="newPasswordInput">
+        </div>
+        <div class="form-group">
+            <label for="verifyPasswordInput">Verify password</label>
+            <input type="password" class="form-control" name="verifyPasswordInput">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+{% endblock %}

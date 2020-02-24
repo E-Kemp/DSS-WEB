@@ -25,7 +25,6 @@ def search():
         return render_template('search.html', user = user, search = search)
     return redirect('/home')
 
-    
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -61,6 +60,16 @@ def post():
         title = request.form['titleInput']
         post = request.form['postInput']
     return render_template('post.html', user = user)#, error = error)
+
+
+@app.route('/settings', methods=['GET', 'POST'])
+def settings():
+    user = None
+    if request.method == 'POST':
+        oldPass = request.form['oldPasswordInput']
+        newPass = request.form['newPasswordInput']
+        verPass = request.form['verifyPasswordInput']
+    return render_template('settings.html', user = user)
 
 
 if __name__ == "__main__":

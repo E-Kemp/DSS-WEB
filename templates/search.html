@@ -1,6 +1,7 @@
 {% extends "layout/template.html" %}
 {% block title %}Search{% endblock %}
 {% block content %}
+    <h1>Search: {{ search }}</h1>
     <div class="alert alert-warning">
         <strong>Warning!</strong> There is no database API.<br><strong>{{ search }}</strong> could not be found.
     </div>

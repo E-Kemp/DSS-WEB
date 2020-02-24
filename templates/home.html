@@ -1,8 +1,9 @@
 {% extends "layout/template.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
+	<h1>Home</h1>
 	{% for post in posts %}
-		<div class="container bg-white mb-4 py-2">
+		<div class="container bg-white {% if not loop.last %}mb-3{% endif %} py-2">
 			<h1>{{ post.title }}</h1>
 			<h3>{{ post.username }}</h3>
 			<p>{{ post.content }}</p>

@@ -25,10 +25,10 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/home">Home</a>
 				</li>
+				{% if user %}
 				<li class="nav-item">
 					<a class="nav-link" href="/post">Post</a>
 				</li>
-				{% if user %}
 				<li class="nav-item">
 					<a class="nav-link" href="/login">Logout</a>
 				</li>
@@ -59,7 +59,7 @@
 		<div class="row justify-content-center">
 			<div class="col-3 col-md-3 my-auto">
 				<h5>The Pirate Cove</h5>
-				<p>Copyright The Pirate Cove 2020</p>
+				<p>&copy; The Pirate Cove 2020</p>
 			</div>
 			<div class="col-3 col-md-3 my-auto">
 				<h5>Links</h5>
