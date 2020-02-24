@@ -2,10 +2,10 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 	{% for post in posts %}
-		<div class="container bg-white">
+		<div class="container bg-white mb-4 py-2">
 			<h1>{{ post.title }}</h1>
-			<h2>{{ post.username }}</h2>
+			<h3>{{ post.username }}</h3>
 			<p>{{ post.content }}</p>
-		</div>				
+		</div>
 	{% endfor %}
 {% endblock %}

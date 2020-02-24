@@ -1,0 +1,20 @@
+{% extends "layout/template.html" %}
+{% block title %}Post{% endblock %}
+{% block content %}
+    {% if error %}
+            <div class="alert alert-warning">
+                <strong>Warning!</strong> {{ error }}
+            </div>
+    {% endif %}
+	<form action="/post" method="post">
+        <div class="form-group">
+            <label for="titleInput">Title</label>
+            <input type="text" class="form-control" name="titleInput" aria-describedby="titleHelp">
+        </div>
+        <div class="form-group">
+            <label for="postInput">Post</label>
+            <textarea class="form-control" rows="5" name="postInput"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+{% endblock %}
