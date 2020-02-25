@@ -28,11 +28,9 @@ def search():
 
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET'])
 def login():
     error = None
-    if request.method == 'POST':
-        error = 'There\'s no database API yet! Try again later'
     return render_template('login.html', user = request.cookies.get('userID'), error = error)
 
 

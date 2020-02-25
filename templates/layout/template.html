@@ -7,14 +7,22 @@
 		<!-- JavaScript Dependancies -->
 		<script src="static/js/jquery-3.4.1.min.js"></script>
 		<script src="static/js/bootstrap.bundle.js"></script>
+		{% block js %}{% endblock %}
+
 		
 		<!-- CSS Files -->
 		<link rel="stylesheet" href="static/css/bootstrap-custom.css">
 		<link rel="stylesheet" href="static/css/stylesheet.css">
+
+
+		<link rel="icon" href="static/images/icon.png">
 	</head>
 	<body class="bg-light">
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+		<a class="navbar-brand" href="/home">
+			<img src="static/images/logo3.png" alt="">
+		</a>
 		<a class="navbar-brand" href="/home">The Pirate Cove</a>
 		<!-- Navbar toggle button for smaller displays -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
