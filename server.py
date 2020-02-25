@@ -1,10 +1,12 @@
-from flask import Flask, redirect, render_template, request, flash
+from flask import Flask, redirect, render_template, request, flash, make_response
 app = Flask(__name__)
+
+user = "test"
+
 
 @app.route('/')
 @app.route('/home')
 def home():
-    user = None
     data = {
         "title":"Test",
         "username":"wibble",
@@ -14,31 +16,28 @@ def home():
         "username":"wibble",
         "content":"hello world!"}
     posts = [data, post2]    
-    return render_template('home.html', user = user, posts = posts)
+    return render_template('home.html', user = request.cookies.get('userID'), posts = posts)
     
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
-    user = None
     if request.method == 'POST':
         search = request.form['search']
-        return render_template('search.html', user = user, search = search)
+        return render_template('search.html', user = request.cookies.get('userID'), search = search)
     return redirect('/home')
 
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    user = None
     error = None
     if request.method == 'POST':
         error = 'There\'s no database API yet! Try again later'
-    return render_template('login.html', user = user, error = error)
+    return render_template('login.html', user = request.cookies.get('userID'), error = error)
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    user = None
     error = None
     if request.method == 'POST':
         username = request.form['usernameInput']
@@ -49,27 +48,45 @@ def register():
             error = 'The passwords didn\'t match!'
         else:
             error = 'There\'s no database API yet! Try again later'
-    return render_template('register.html', user = user, error = error)
+    return render_template('register.html', user = request.cookies.get('userID'), error = error)
 
 
-@app.route('/post', methods=['GET', 'POST'])
-def post():
-    user = None
+@app.route('/newpost', methods=['GET', 'POST'])
+def newpost():
     #error = None
     if request.method == 'POST':
         title = request.form['titleInput']
         post = request.form['postInput']
-    return render_template('post.html', user = user)#, error = error)
+    return render_template('newpost.html', user = request.cookies.get('userID'))#, error = error)
 
 
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
-    user = None
     if request.method == 'POST':
         oldPass = request.form['oldPasswordInput']
         newPass = request.form['newPasswordInput']
         verPass = request.form['verifyPasswordInput']
-    return render_template('settings.html', user = user)
+    return render_template('settings.html', user = request.cookies.get('userID'))
+
+
+
+#TESTING GROUND
+# --------------------------------------------------------------------------------- #
+
+@app.route('/setuser', methods=['GET', 'POST'])
+def setuser():
+    response = make_response(render_template('home.html'))
+    response.set_cookie('userID', 'test')
+    return response
+
+@app.route('/setnone', methods=['GET', 'POST'])
+def setnone():
+    response = make_response(render_template('home.html'))
+    response.set_cookie('userID', expires=0)
+    return response
+
+# --------------------------------------------------------------------------------- #
+
 
 
 if __name__ == "__main__":

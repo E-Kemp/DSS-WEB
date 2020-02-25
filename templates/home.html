@@ -4,7 +4,9 @@
 	<div class="row justify-content-between mx-1">
 		<h1 class="">Home</h1>
 		<div class="p-0">
+			{% if user %}
 			<a class="btn btn-secondary" href="/post" role="button">New Post</a>
+			{% endif %}
 		</div>
 	</div>
 	{% for post in posts %}

@@ -7,7 +7,7 @@
                 <strong>Warning!</strong> {{ error }}
             </div>
     {% endif %}
-	<form action="/post" method="post">
+	<form action="{{ url_for('newpost') }}" method="post">
         <div class="form-group">
             <label for="titleInput">Title</label>
             <input type="text" class="form-control" name="titleInput" aria-describedby="titleHelp">
