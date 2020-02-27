@@ -1,6 +1,24 @@
 from flask import Flask, redirect, render_template, request, flash
 app = Flask(__name__)
 
+
+
+#These are really important headers for CSRF, XSS 
+#plus a few other things
+#do not touch!
+def addheaders(response):
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains' #see https://www.thesslstore.com/blog/what-is-hypertext-strict-transport-security-hsts/
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    return response
+app.after_request(addheaders)
+
+
+
+
+
+
+
 @app.route('/')
 @app.route('/home')
 def home():
