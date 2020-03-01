@@ -1,6 +1,27 @@
 from flask import Flask, redirect, render_template, request, flash, make_response 
+import json, sys
 app = Flask(__name__)
 
+RUNTIME = "LOCAL"
+WEB_ADDRESS = "127.0.0.1:5432"
+WEB_PORT = "5432"
+API_ADDRESS = "127.0.0.1:5000"
+API_PORT = "5000"
+
+sys.path.append("lib/")
+from response_headers import Headers
+
+if RUNTIME == "LOCAL": 
+    data = open('config/HEADERS_local.conf', 'r')
+    
+elif RUNTIME == "PRODUCTION":
+    data = open('config/HEADERS_production.conf', 'r')
+
+header_struct = json.load(data)
+data.close()
+
+app = Flask(__name__)
+app.after_request(Headers.addResponseHeaders)
 
 
 #These are really important headers for CSRF, XSS 
@@ -91,4 +112,4 @@ def settings():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=WEB_PORT)
