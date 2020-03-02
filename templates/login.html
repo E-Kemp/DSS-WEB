@@ -1,15 +1,14 @@
 {% extends "layout/template.html" %}
 {% block title %}Login{% endblock %}
 {% block js %}
-    <script src="static/js/form-handling/login.js"></script>
+    <script src="static/js/page-handling/login-handler.js"></script>
 {% endblock %}
 {% block extraParams %}col-4{% endblock %}
 {% block content %}
     <h1>Login</h1>
     <div id="errorContainer" class="alert alert-warning" style="display: none;">
-        <strong>Warning!</strong>
     </div>
-	<form name="login">
+	<form name="login" id="login-form">
         <div class="form-group">
             <label for="usernameInput">Username</label>
             <input type="username" class="form-control" name="usernameInput" placeholder="Enter username">
@@ -18,7 +17,7 @@
             <label for="usernameInput">Password</label>
             <input type="password" class="form-control" name="passwordInput" placeholder="Enter password">
         </div>
-        <button onclick="validateForm(); return false" class="btn btn-primary">Login</button>    
+        <button id="loginButton" type="submit" class="btn btn-primary">Login</button>    
     </form>
     
     <div class="mt-3">
