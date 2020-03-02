@@ -8,7 +8,7 @@
     <h1>Login</h1>
     <div id="errorContainer" class="alert alert-warning" style="display: none;">
     </div>
-	<form name="login" id="login-form">
+	<form name="login" id="login-form" action="http://127.0.0.1:5000/account/sign-in" method="post">
         <div class="form-group">
             <label for="usernameInput">Username</label>
             <input type="username" class="form-control" name="usernameInput" placeholder="Enter username">
@@ -16,7 +16,7 @@
         <div class="form-group">
             <label for="usernameInput">Password</label>
             <input type="password" class="form-control" name="passwordInput" placeholder="Enter password">
-        </div>
+</div>
         <button id="loginButton" type="submit" class="btn btn-primary">Login</button>    
     </form>
     
