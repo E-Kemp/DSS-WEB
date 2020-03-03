@@ -1,3 +1,4 @@
+
 from flask import Flask, redirect, render_template, request, flash, make_response 
 import json, sys
 app = Flask(__name__)
@@ -35,80 +36,43 @@ def addheaders(response):
 app.after_request(addheaders)
 
 
-
-
-
-
-
 @app.route('/')
 @app.route('/home')
 def home():
-    user = None
-    data = {
-        "title":"Test",
-        "username":"wibble",
-        "content":"hello world!"}
-    post2 = {
-        "title":"Test",
-        "username":"wibble",
-        "content":"hello world!"}
-    posts = [data, post2]    
-    return render_template('home.html', user = user, posts = posts)
+    return render_template('home.html', user = request.cookies.get('USR_ID'))
     
 
-@app.route('/search', methods=['GET', 'POST'])
+@app.route('/search')
 def search():
-    user = None
-    if request.method == 'POST':
-        search = request.form['search']
-        return render_template('search.html', user = user, search = search)
-    return redirect('/home')
+    return render_template('search.html', user = request.cookies.get('USR_ID'))
 
 
-
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login')
 def login():
-    user = None
-    error = None
-    if request.method == 'POST':
-        error = 'There\'s no database API yet! Try again later'
-    return render_template('login.html', user = user, error = error)
+    return render_template('login.html', user = request.cookies.get('USR_ID'))
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register')
 def register():
-    user = None
-    error = None
-    if request.method == 'POST':
-        username = request.form['usernameInput']
-        email = request.form['emailInput']
-        password = request.form['passwordInput'] #pass directly into API later?
-        verify = request.form['verifyPasswordInput']
-        if(password != verify):
-            error = 'The passwords didn\'t match!'
-        else:
-            error = 'There\'s no database API yet! Try again later'
-    return render_template('register.html', user = user, error = error)
+    return render_template('register.html', user = request.cookies.get('USR_ID'))
 
 
-@app.route('/post', methods=['GET', 'POST'])
-def post():
-    user = None
-    #error = None
-    if request.method == 'POST':
-        title = request.form['titleInput']
-        post = request.form['postInput']
-    return render_template('post.html', user = user)#, error = error)
+@app.route('/newpost')
+def newpost():
+    return render_template('newpost.html', user = request.cookies.get('USR_ID'))
 
 
-@app.route('/settings', methods=['GET', 'POST'])
+@app.route('/settings')
 def settings():
-    user = None
-    if request.method == 'POST':
-        oldPass = request.form['oldPasswordInput']
-        newPass = request.form['newPasswordInput']
-        verPass = request.form['verifyPasswordInput']
-    return render_template('settings.html', user = user)
+    return render_template('settings.html', user = request.cookies.get('USR_ID'))
+
+
+@app.route('/logout')
+def logout():
+    response = make_response(render_template('home.html'))
+    response.set_cookie('USR_ID', '', expires=0)
+    return response
+    
 
 
 if __name__ == "__main__":

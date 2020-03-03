@@ -1,17 +1,16 @@
 {% extends "layout/template.html" %}
 {% block title %}Home{% endblock %}
+{% block js %}
+    <script src="static/js/page-handling/home-handler.js"></script>
+{% endblock %}
 {% block content %}
 	<div class="row justify-content-between mx-1">
 		<h1 class="">Home</h1>
 		<div class="p-0">
+			{% if user %}
 			<a class="btn btn-secondary" href="/post" role="button">New Post</a>
+			{% endif %}
 		</div>
 	</div>
-	{% for post in posts %}
-		<div class="container bg-white {% if not loop.last %}mb-3{% endif %} py-2">
-			<h1>{{ post.title }}</h1>
-			<h3>{{ post.username }}</h3>
-			<p>{{ post.content }}</p>
-		</div>
-	{% endfor %}
+	<div id="posts"></div>
 {% endblock %}
