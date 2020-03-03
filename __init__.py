@@ -67,12 +67,6 @@ def settings():
     return render_template('settings.html', user = request.cookies.get('USR_ID'))
 
 
-@app.route('/logout')
-def logout():
-    response = make_response(render_template('home.html'))
-    response.set_cookie('USR_ID', '', expires=0)
-    return response
-    
 
 
 if __name__ == "__main__":
