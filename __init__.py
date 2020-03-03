@@ -39,34 +39,40 @@ app.after_request(addheaders)
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html', user = request.cookies.get('userID'))
+    return render_template('home.html', user = request.cookies.get('USR_ID'))
     
 
 @app.route('/search')
 def search():
-    return render_template('search.html', user = request.cookies.get('userID'))
+    return render_template('search.html', user = request.cookies.get('USR_ID'))
 
 
 @app.route('/login')
 def login():
-    return render_template('login.html', user = request.cookies.get('userID'))
+    return render_template('login.html', user = request.cookies.get('USR_ID'))
 
 
 @app.route('/register')
 def register():
-    return render_template('register.html', user = request.cookies.get('userID'))
+    return render_template('register.html', user = request.cookies.get('USR_ID'))
 
 
 @app.route('/newpost')
 def newpost():
-    return render_template('newpost.html', user = request.cookies.get('userID'))
+    return render_template('newpost.html', user = request.cookies.get('USR_ID'))
 
 
 @app.route('/settings')
 def settings():
-    return render_template('settings.html', user = request.cookies.get('userID'))
+    return render_template('settings.html', user = request.cookies.get('USR_ID'))
 
 
+@app.route('/logout')
+def logout():
+    response = make_response(render_template('home.html'))
+    response.set_cookie('USR_ID', '', expires=0)
+    return response
+    
 
 
 if __name__ == "__main__":
