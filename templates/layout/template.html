@@ -7,6 +7,9 @@
 		<!-- JavaScript Dependancies -->
 		<script src="static/js/jquery-3.4.1.min.js"></script>
 		<script src="static/js/bootstrap.bundle.js"></script>
+		{% if user %}
+		<script src="static/js/page-handling/logout-handler"></script>
+		{% endif %}
 		{% block js %}{% endblock %}
 
 		
@@ -38,7 +41,7 @@
 					<a class="nav-link" href="/newpost">Post</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/logout">Logout</a>
+					<a class="nav-link" href="http://127.0.0.1:5000/account/sign-out">Logout</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/settings">Settings</a>
