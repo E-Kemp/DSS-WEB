@@ -62,6 +62,11 @@ def newpost():
     return render_template('newpost.html', user = request.cookies.get('USR_ID'))
 
 
+@app.route('/posts/<uuid>')
+def profile(uuid):
+    return render_template('post.html', uuid = uuid, user = request.cookies.get('USR_ID'))
+
+
 @app.route('/settings')
 def settings():
     return render_template('settings.html', user = request.cookies.get('USR_ID'))

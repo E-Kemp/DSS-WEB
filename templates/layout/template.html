@@ -5,26 +5,28 @@
 		<title>{% block title %}{% endblock %} - Pirate's Cove!</title>
 		
 		<!-- JavaScript Dependancies -->
-		<script src="static/js/jquery-3.4.1.min.js"></script>
-		<script src="static/js/bootstrap.bundle.js"></script>
+		<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.cookie.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
 		{% if user %}
-		<script src="static/js/page-handling/logout-handler"></script>
+		<script src="{{ url_for('static', filename='js/page-handling/logout-handler.js') }}"></script>
 		{% endif %}
-		{% block js %}{% endblock %}
+		{% block js %}
+		{% endblock %}
 
 		
 		<!-- CSS Files -->
-		<link rel="stylesheet" href="static/css/bootstrap-custom.css">
-		<link rel="stylesheet" href="static/css/stylesheet.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-custom.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
 
 
-		<link rel="icon" href="static/images/icon.png">
+		<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
 	</head>
 	<body class="bg-light">
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-dark">
 		<a class="navbar-brand" href="/home">
-			<img src="static/images/logo3.png" alt="">
+			<img src="{{ url_for('static', filename='images/logo3.png') }}" alt="">
 		</a>
 		<a class="navbar-brand" href="/home">The Pirate Cove</a>
 		<!-- Navbar toggle button for smaller displays -->
@@ -59,8 +61,8 @@
 		</div>
 	</nav>
 
-
-	<div id="main" class="container bg-dark py-3 my-3 {% block extraParams %}{% endblock %}">
+	<!-- Using a dirty margin at the bottom to deal with the issue of the footer..... -->
+	<div id="main" class="container bg-dark py-3 mt-3 {% block extraParams %}{% endblock %}" style="margin-bottom: 126px">
 		{% block content %}{% endblock %}
 	</div>
 
