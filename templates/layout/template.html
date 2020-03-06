@@ -7,6 +7,7 @@
 		<!-- JavaScript Dependancies -->
 		<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/jquery.cookie.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/page-handling/global-handler.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
 		{% if user %}
 		<script src="{{ url_for('static', filename='js/page-handling/logout-handler.js') }}"></script>
@@ -38,7 +39,7 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/home">Home</a>
 				</li>
-				{% if user %}
+				{% if sesh %}
 				<li class="nav-item">
 					<a class="nav-link" href="/newpost">Post</a>
 				</li>
@@ -51,6 +52,9 @@
 				{% else %}
 				<li class="nav-item">
 					<a class="nav-link" href="/login">Login</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/register">Register</a>
 				</li>
 				{% endif %}
 		</ul>
