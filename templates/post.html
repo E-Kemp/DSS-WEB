@@ -6,8 +6,9 @@
 {% block content %}
     <div id="posts"></div>
     <div id="comments"></div>
-    {% if user %}
+    {% if sesh %}
     <form class="mt-3" name="newpost" id="newpost-form" action="http://127.0.0.1:5000/post/comment/createComment" method="post">
+
         <div class="form-group">
             <label for="postInput">Add Comment</label>
             <textarea class="form-control" rows="5" name="comment_body"></textarea>
