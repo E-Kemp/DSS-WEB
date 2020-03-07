@@ -12,10 +12,12 @@ $(document).ready(function() {
 function formHandler(reqType, reqURL, formID, callback) {        
     return $.ajax({
         //Access-Control-Allow-Headers: x-requested-with, x-requested-by
-        beforeSend: function(req) {
-            req.setRequestHeader("Access-Control-Allow-Headers", "x-requested-with, x-requested-by");
-        },
+       // beforeSend: function(req) {
+       //     req.setRequestHeader("Access-Control-Allow-Headers", "x-requested-with, x-requested-by");
+       // },
         type: reqType,
+		xhrFields: { withCredentials: true },
+		crossDomain: true,
         url: reqURL,
         data: $(formID).serialize(),
         success: callback
