@@ -34,7 +34,8 @@ $(document).ready(function() {
 
     getHandler('get', 'http://127.0.0.1:5000/post/comment/getComments?post_id=' + uuid, function(response2) {
         for(var j in response2) {
-            $('#comments').append(insertComment(j));
+            alert(response2[j]["username"]);
+            $('#comments').append(insertComment(response2[j]));
         }
     });
 
@@ -42,6 +43,7 @@ $(document).ready(function() {
     if($('#newpost-form').length) {
         $('#postID').val(uuid);
         $('#newpost-form').submit(function(e) {
+            e.preventDefault();
             var postUrl = 'http://127.0.0.1:5000/post/comment/createComment';
             var postType = 'post';
             var formID = '#newpost-form';

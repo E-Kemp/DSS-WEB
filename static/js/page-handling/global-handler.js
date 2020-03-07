@@ -1,6 +1,20 @@
+$(document).ready(function() {
+    if($('#logout-handler').length) {
+        $('#logout-handler').click(function() {
+            // Finish this laterrrrr
+        });
+    }
+});
+
+
+
 // Post request handler
 function formHandler(reqType, reqURL, formID, callback) {        
     return $.ajax({
+        //Access-Control-Allow-Headers: x-requested-with, x-requested-by
+        beforeSend: function(req) {
+            req.setRequestHeader("Access-Control-Allow-Headers", "x-requested-with, x-requested-by");
+        },
         type: reqType,
         url: reqURL,
         data: $(formID).serialize(),
@@ -34,4 +48,5 @@ function messageText(type, message) {
         case 'info': return '<strong>Intormation!</strong> ' + message;
         case 'danger': return '<strong>Fail!</strong> ' + message;
     }
+
 }
