@@ -1,24 +1,30 @@
 {% extends "layout/template.html" %}
 {% block title %}Settings{% endblock %}
 {% block extraParams %}col-4{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static', filename='js/page-handling/settings-handler.js') }}"></script>
+{% endblock %}
 {% block content %}
-    <h1>User Settings</h1>
-    <div class="alert alert-warning">
-        <strong>Warning!</strong> There is no database API.<br>There's no settings to display!!
-    </div>
-    <form action="{{ url_for('settings') }}" method="post">
+    <h1>Change Password</h1>
+    <form id="password-form" method="post">
         <div class="form-group">
             <label for="oldPasswordInput">Old Password</label>
-            <input type="password" class="form-control" name="oldPasswordInput">
+            <input type="password" class="form-control" name="old_p">
         </div>
         <div class="form-group">
             <label for="newPasswordInput">New Password</label>
-            <input type="password" class="form-control" name="newPasswordInput">
+            <input type="password" class="form-control" name="new_p">
         </div>
         <div class="form-group">
             <label for="verifyPasswordInput">Verify password</label>
-            <input type="password" class="form-control" name="verifyPasswordInput">
+            <input type="password" class="form-control" name="ver_p">
         </div>
-        <button type="submit" class="btn btn-primary">Register</button>
+        <div class="row justify-content-between mx-1">
+            <button type="submit" class="btn btn-secondary">Change Password</button>
+            <button id="delete-button" type="button" class="btn btn-secondary">Delete Account</button>
+        </div>        
     </form>
+    <form id="delete-form" method="post">
+    </form>
+    
 {% endblock %}
