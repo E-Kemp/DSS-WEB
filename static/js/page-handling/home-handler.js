@@ -1,5 +1,7 @@
 $(document).ready(function() { 
 
+    message('info', 'Here\'s a test message!');
+
     getHandler('get', 'http://127.0.0.1:5000/post/getPosts', function(response) {
         for(var i in response) {
                 $('#posts').append($('<div>').addClass('pPost container bg-white py-2 mt-3')
@@ -13,7 +15,7 @@ $(document).ready(function() {
             }
     });
 
-            
+    
             
     //     }
     // }, false)

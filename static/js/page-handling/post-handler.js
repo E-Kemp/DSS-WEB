@@ -4,13 +4,14 @@ $(document).ready(function() {
     var uuid = path[path.length - 1];
 
 
+    // GET HANDLER
     getHandler('get', 'http://127.0.0.1:5000/post/getPosts', function(response) {
         for(var i in response) {
             if(response[i]["UUID"] == uuid) {
                 //Add the post
                 $('#posts').append(insertPost(response[i]));
 
-                alert(response[i]["user_UUID"] + "\n" + $.cookie("USR_ID"));
+                //alert(response[i]["user_UUID"] + "\n" + $.cookie("USR_ID"));
 
                 //Add a delete button if necessary
                 if(response[i]["user_UUID"] == $.cookie("USR_ID")) {
@@ -22,18 +23,36 @@ $(document).ready(function() {
                 else {
                 }
 
-                //Comments
-
-                getHandler('get', 'http://127.0.0.1:5000/post/comment/getComments?post_id=' + uuid, function(response2) {
-                    for(var j in response2) {
-                        $('#comments').append(insertComment(j));
-                    }
-                });
 
                 break;
             }
         }
     });
+
+    
+    //Comments
+
+    getHandler('get', 'http://127.0.0.1:5000/post/comment/getComments?post_id=' + uuid, function(response2) {
+        for(var j in response2) {
+            $('#comments').append(insertComment(j));
+        }
+    });
+
+    //If the commment box is there, add the submit handler
+    if($('#newpost-form').length) {
+        $('#postID').val(uuid);
+        $('#newpost-form').submit(function(e) {
+            var postUrl = 'http://127.0.0.1:5000/post/comment/createComment';
+            var postType = 'post';
+            var formID = '#newpost-form';
+
+            formHandler(postType, postUrl, formID, function(response) {
+                $('#comments').append(insertComment(response));
+            });
+        });
+    }
+
+    
 });
 
 
