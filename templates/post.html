@@ -7,14 +7,14 @@
     <div id="posts"></div>
     <div id="comments"></div>
     {% if sesh %}
-    <form class="mt-3" name="newpost" id="newpost-form" action="http://127.0.0.1:5000/post/comment/createComment" method="post">
+    <form class="mt-3" name="newcomment" id="newcomment-form" action="http://127.0.0.1:5000/post/comment/createComment" method="post">
 
         <div class="form-group">
             <label for="postInput">Add Comment</label>
             <textarea class="form-control" rows="5" name="comment_body"></textarea>
         </div>
         <input type="hidden" id="postID" name="post_id">
-        <button id="newpostButton" type="submit" class="btn btn-primary">Post</button>
+        <button id="newcommentbutton" type="submit" class="btn btn-primary">Post</button>
     </form>
     {% endif %}
     

@@ -71,6 +71,7 @@ function clearMessages(){
 }
 // Dismissable site message
 function message(type, message) {
+    clearMessages();
     $('#main').prepend($('<div>').attr('class', 'alert alert-' + type + ' alert-dismissible')
         .append($('<a>').attr({'href':'#', 'class':'close', 'data-dismiss':'alert', 'aria-label':'close'}).text("\u00d7"))
         .append(messageText(type, message))
@@ -86,7 +87,16 @@ function messageText(type, message) {
     }
 }
 
-function redirectMessage(type, msg) {
-    window.location.replace('http://127.0.0.1:5432/?msgType=' + type + '&msg=' + msg);
+function redirectMessage(url, type, msg) {
+    window.location.replace(url + '?msgType=' + type + '&msg=' + msg);
+}
+
+function checkFail(response, success) {
+    if(response["code"] == "danger") {
+        redirectMessage('http://127.0.0.1:5432/', response["code"], response["reason"]);
+    }
+    else {
+        success;
+    }
 }
 

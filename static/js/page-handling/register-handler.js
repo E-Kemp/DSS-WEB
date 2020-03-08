@@ -17,9 +17,12 @@ $(document).ready(function() {
 
         //FORM HANDLER
         formHandler(postType, postUrl, formID, function(response) {
-            var msgType = "info";
-            var msg = "Please verify your email address before logging in.";
-            redirectMessage(msgType, msg);
+            checkFail(response, function() {
+                url = 'http://127.0.0.1:5432/'
+                var msgType = "info";
+                var msg = "Please verify your email address before logging in.";
+                redirectMessage(url, msgType, msg);
+            });
         });
 
         return true;
