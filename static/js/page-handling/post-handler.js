@@ -17,8 +17,10 @@ $(document).ready(function() {
                 if(response[i]["user_UUID"] == $.cookie("USR_ID")) {
                     $('#posts').append($('<a>').attr({
                         "class": "btn btn-secondary mt-3",
-                        "href": "/home",
+						"id": "delete-post",
+                        "href": "#",
                     }).text('Delete'));
+					createDeletePostHandler(uuid);
                 }
                 else {
                 }
@@ -53,9 +55,35 @@ $(document).ready(function() {
             });
         });
     }
-
-    
 });
+
+function createDeletePostHandler(uuid){
+//delete post listner
+	$('#delete-post').click(function(e) {
+        e.preventDefault();
+
+
+        var url = 'http://127.0.0.1:5000/post/deletePost';
+        var type = 'get';
+		var in_data = {'post_UUID': uuid};
+
+        postHandler(url, in_data, function(response){
+			if (response["code"] == "success"){
+				window.location.replace('http://127.0.0.1:5432/');
+			}else{
+				clearMessages();
+				message(response["code"], response["reason"]);
+			}
+        });
+    })
+	
+}
+
+
+
+
+
+
 
 
 //Add post function

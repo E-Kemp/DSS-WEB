@@ -16,6 +16,18 @@ $(document).ready(function() {
 });
 
 
+function postHandler(reqURL, in_data, callback){
+	return $.ajax({
+        type: 'POST',
+		xhrFields: { withCredentials: true },
+		crossDomain: true,
+        url: reqURL,
+        data: in_data,
+        success: callback
+    });
+}
+
+
 
 // Post request handler
 function formHandler(reqType, reqURL, formID, callback) {        
