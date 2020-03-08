@@ -36,7 +36,7 @@ $(document).ready(function() {
 
     getHandler('get', 'http://127.0.0.1:5000/post/comment/getComments?post_id=' + uuid, function(response2) {
         for(var j in response2) {
-            alert(response2[j]["username"]);
+            //alert(response2[j]["username"]);
             $('#comments').append(insertComment(response2[j]));
         }
     });
@@ -64,7 +64,6 @@ function createDeletePostHandler(uuid){
 
 
         var url = 'http://127.0.0.1:5000/post/deletePost';
-        var type = 'get';
 		var in_data = {'post_UUID': uuid};
 
         postHandler(url, in_data, function(response){
@@ -82,8 +81,24 @@ function createDeletePostHandler(uuid){
 
 
 
+function createDeleteCommentHandler(del_id, uuid){
+	alert(del_id);
+	$('#'+del_id).click(function(e) {
+        e.preventDefault();
+		alert("sg");
+        var url = 'http://127.0.0.1:5000/post/comment/deleteComment';
+		var in_data = {'comment_UUID': uuid};
 
-
+        postHandler(url, in_data, function(response){
+			if (response["code"] == "success"){
+				window.location.replace('http://127.0.0.1:5432/');
+			}else{
+				clearMessages();
+				message(response["code"], response["reason"]);
+			}
+        });
+    })
+}
 
 
 //Add post function
@@ -96,10 +111,24 @@ function insertPost(response) {
 }
 
 function insertComment(response) {
-    return $('<div>').addClass('pPost container bg-white py-2 mt-3')
+	new_containier = $('<div>').addClass('pPost container bg-white py-2 mt-3')
         .append($('<h6>').addClass('pDateTime').text(response["date_posted"] + " " + response["time_posted"]))
         .append($('<h3>').addClass('pUser').text(response["username"]))
         .append($('<p>').addClass('pContent').text(response["body"]));
+    
+		
+	if(response["user_UUID"] == $.cookie("USR_ID")) {
+		//alert("My comment!");
+		var del_but_id = "delete-comment-"+response["UUID"];
+		new_containier.append($('<a>').attr({
+			"class": "btn btn-secondary mt-3",
+			"id": del_but_id,
+			"value": response["UUID"],
+			"href": "#",
+		}).text('Delete'));
+		createDeleteCommentHandler(del_but_id, response["UUID"]);
+	}
+	return new_containier;
 }
 
 

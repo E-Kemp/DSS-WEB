@@ -6,21 +6,21 @@
 {% endblock %}
 {% block content %}
     <h1>Change Password</h1>
-    <form id="password-form" method="post">
+    <form id="password-form" action="http://127.0.0.1:5000/account/changePassword">
         <div class="form-group">
             <label for="oldPasswordInput">Old Password</label>
-            <input type="password" class="form-control" name="old_p">
+            <input type="password" class="form-control" name="old_p" id="old_p_in">
         </div>
         <div class="form-group">
             <label for="newPasswordInput">New Password</label>
-            <input type="password" class="form-control" name="new_p">
+            <input type="password" class="form-control" name="new_p" id="new_p_in">
         </div>
         <div class="form-group">
             <label for="verifyPasswordInput">Verify password</label>
-            <input type="password" class="form-control" name="ver_p">
+            <input type="password" class="form-control" name="ver_p" id="new2_p_in">
         </div>
         <div class="row justify-content-between mx-1">
-            <button type="submit" class="btn btn-secondary">Change Password</button>
+            <button id="pw-change-id" type="submit" class="btn btn-secondary">Change Password</button>
             <button id="delete-button" type="button" class="btn btn-secondary">Delete Account</button>
         </div>        
     </form>
