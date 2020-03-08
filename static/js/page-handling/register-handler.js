@@ -17,7 +17,9 @@ $(document).ready(function() {
 
         //FORM HANDLER
         formHandler(postType, postUrl, formID, function(response) {
-            window.location.replace('http://127.0.0.1:5432/');
+            var msgType = "info";
+            var msg = "Please verify your email address before logging in.";
+            redirectMessage(msgType, msg);
         });
 
         return true;

@@ -1,4 +1,10 @@
 $(document).ready(function() {
+
+    var urlParams = new URLSearchParams(window.location.search);
+
+    if(urlParams.has('msgType'))
+        message(urlParams.get('msgType'), urlParams.get('msg'));
+
     $('#logout-button').click(function(e) {
         e.preventDefault();
 
@@ -13,6 +19,7 @@ $(document).ready(function() {
             window.location.replace('http://127.0.0.1:5432/')
         });
     })
+
 });
 
 
@@ -62,8 +69,6 @@ function getHandler(reqType, reqURL, callback) {
 function clearMessages(){
 	$( ".alert" ).remove();
 }
-
-
 // Dismissable site message
 function message(type, message) {
     $('#main').prepend($('<div>').attr('class', 'alert alert-' + type + ' alert-dismissible')
@@ -79,5 +84,9 @@ function messageText(type, message) {
         case 'info': return '<strong>Intormation!</strong> ' + message;
         case 'danger': return '<strong>Fail!</strong> ' + message;
     }
-
 }
+
+function redirectMessage(type, msg) {
+    window.location.replace('http://127.0.0.1:5432/?msgType=' + type + '&msg=' + msg);
+}
+

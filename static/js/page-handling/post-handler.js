@@ -20,7 +20,7 @@ $(document).ready(function() {
 						"id": "delete-post",
                         "href": "#",
                     }).text('Delete'));
-					createDeletePostHandler(uuid);
+					deletePostHandler(uuid);
                 }
                 else {
                 }
@@ -50,15 +50,15 @@ $(document).ready(function() {
             var postType = 'post';
             var formID = '#newpost-form';
 
-            formHandler(postType, postUrl, formID, function(response) {
-                $('#comments').append(insertComment(response));
+            formHandler(postType, postUrl, formID, function(response2) {
+                    $('#comments').append(insertComment(response2["comment"]));                
             });
         });
     }
 });
 
-function createDeletePostHandler(uuid){
-//delete post listner
+function deletePostHandler(uuid){
+    //delete post listner
 	$('#delete-post').click(function(e) {
         e.preventDefault();
 
@@ -75,17 +75,16 @@ function createDeletePostHandler(uuid){
 			}
         });
     })
-	
 }
 
 
 
 
 function createDeleteCommentHandler(del_id, uuid){
-	alert(del_id);
+	//alert(del_id);
 	$('#'+del_id).click(function(e) {
         e.preventDefault();
-		alert("sg");
+		//alert("sg");
         var url = 'http://127.0.0.1:5000/post/comment/deleteComment';
 		var in_data = {'comment_UUID': uuid};
 
