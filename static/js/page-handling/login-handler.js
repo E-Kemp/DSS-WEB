@@ -13,7 +13,6 @@ $(document).ready(function() {
 			}else{
 				clearMessages();
 				message(response["code"], response["reason"]);
-				
 			}
             //message('info', JSON.stringify(response));
             //;

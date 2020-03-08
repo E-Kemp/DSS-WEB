@@ -1,4 +1,10 @@
 $(document).ready(function() {
+
+    var urlParams = new URLSearchParams(window.location.search);
+
+    if(urlParams.has('msgType'))
+        message(urlParams.get('msgType'), urlParams.get('msg'));
+
     $('#logout-button').click(function(e) {
         e.preventDefault();
 
@@ -13,6 +19,7 @@ $(document).ready(function() {
             window.location.replace('http://127.0.0.1:5432/')
         });
     })
+
 });
 
 
@@ -62,10 +69,9 @@ function getHandler(reqType, reqURL, callback) {
 function clearMessages(){
 	$( ".alert" ).remove();
 }
-
-
 // Dismissable site message
 function message(type, message) {
+    clearMessages();
     $('#main').prepend($('<div>').attr('class', 'alert alert-' + type + ' alert-dismissible')
         .append($('<a>').attr({'href':'#', 'class':'close', 'data-dismiss':'alert', 'aria-label':'close'}).text("\u00d7"))
         .append(messageText(type, message))
@@ -79,5 +85,18 @@ function messageText(type, message) {
         case 'info': return '<strong>Intormation!</strong> ' + message;
         case 'danger': return '<strong>Fail!</strong> ' + message;
     }
-
 }
+
+function redirectMessage(url, type, msg) {
+    window.location.replace(url + '?msgType=' + type + '&msg=' + msg);
+}
+
+function checkFail(response, success) {
+    if(response["code"] == "danger") {
+        redirectMessage('http://127.0.0.1:5432/', response["code"], response["reason"]);
+    }
+    else {
+        success;
+    }
+}
+
