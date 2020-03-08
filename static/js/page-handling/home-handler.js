@@ -1,6 +1,6 @@
 $(document).ready(function() { 
 
-    message('info', 'Here\'s a test message!');
+    message('info', 'Welcome to the best pirate-themed forum since the land of the internet! <br><br> Please pay particular atention to our forum rules: <br> 1. Pirates only. <br> 2. Ye follow the code by fear of death. <br> 3. The code be more like guidelines anyway.<br><br>Aaarrrrrrr Happy blogin\' to ya!');
 
     getHandler('get', 'http://127.0.0.1:5000/post/getPosts', function(response) {
         for(var i in response) {

@@ -9,10 +9,10 @@ $(document).ready(function() {
         formHandler(postType, postUrl, formID, function(response) {
 			//json_ret = JSON.stringify(response)
 			if (response["code"] == "success"){
-				window.location.replace('http://127.0.0.1:5432/')
-				message("info", "oi oi")
+				window.location.replace('http://127.0.0.1:5432/');
 			}else{
-				message(response["code"], response["reason"])
+				clearMessages();
+				message(response["code"], response["reason"]);
 				
 			}
             //message('info', JSON.stringify(response));

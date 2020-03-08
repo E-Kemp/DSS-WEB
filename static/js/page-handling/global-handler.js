@@ -1,9 +1,18 @@
 $(document).ready(function() {
-    if($('#logout-handler').length) {
-        $('#logout-handler').click(function() {
-            // Finish this laterrrrr
+    $('#logout-button').click(function(e) {
+        e.preventDefault();
+
+		
+        var url = 'http://127.0.0.1:5000/account/sign-out';
+        var type = 'get';
+
+        getHandler(type, url, function(response) {
+            //message('info', JSON.stringify(response));
+			$.removeCookie('S_ID', { path: '/' });
+			$.removeCookie('USR_ID', { path: '/' });
+            window.location.replace('http://127.0.0.1:5432/')
         });
-    }
+    })
 });
 
 
@@ -28,11 +37,19 @@ function formHandler(reqType, reqURL, formID, callback) {
 function getHandler(reqType, reqURL, callback) {
     return $.ajax({
         type: reqType,
+		xhrFields: { withCredentials: true },
+		crossDomain: true,
         url: reqURL,
         success: callback
     });
 }
 
+
+
+//clears messages (to overwrite already existing messages)
+function clearMessages(){
+	$( ".alert" ).remove();
+}
 
 
 // Dismissable site message

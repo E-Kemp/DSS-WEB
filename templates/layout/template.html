@@ -10,9 +10,10 @@
 		<script src="{{ url_for('static', filename='js/page-handling/global-handler.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/page-handling/search-handler.js') }}"></script>
-
+		<!--script src="{{ url_for('static', filename='js/page-handling/logout-handler.js') }}"></script-->
+		
 		{% if user %}
-		<script src="{{ url_for('static', filename='js/page-handling/logout-handler.js') }}"></script>
+		
 		{% endif %}
 		{% block js %}
 		{% endblock %}
