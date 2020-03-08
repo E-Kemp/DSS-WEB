@@ -16,8 +16,15 @@ $(document).ready(function() {
         e.preventDefault();
 
         //FORM HANDLER
-        formHandler(postType, postUrl, formID, function(response) {
-            window.location.replace('http://127.0.0.1:5432/');
+        formHandler(postType, postUrl, formID, function(response) {//json_ret = JSON.stringify(response)
+			if (response["code"] == "success"){
+				window.location.replace('http://127.0.0.1:5432/');
+				alert("an email has been send to the email provided m80");
+			}else{
+				clearMessages();
+				message(response["code"], response["reason"]);
+				
+			}
         });
 
         return true;
