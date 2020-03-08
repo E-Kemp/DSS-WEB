@@ -101,7 +101,7 @@ function createDeleteCommentHandler(del_id, uuid){
 //Add post function
 function insertPost(response) {
     var post = $('<div>').addClass('pPost container bg-white py-2 mt-3')
-        .append($('<h1>').addClass('pTitle').html(response["heading"]))
+        .append($('<h1>').addClass('pTitle').text(response["heading"]))
         .append($('<h6>').addClass('pDateTime').text(response["date_posted"] + " " + response["time_posted"]))
         .append($('<h3>').addClass('pUser').text(response["username"]))
         .append($('<p>').addClass('pContent').text(response["body"]));
@@ -113,7 +113,7 @@ function insertComment(response) {
 	var comment =  $('<div>').addClass('pPost container bg-white py-2 mt-3')
         .append($('<h6>').addClass('pDateTime').text(response["date_posted"] + " " + response["time_posted"]))
         .append($('<h3>').addClass('pUser').text(response["username"]))
-        .append($('<p>').addClass('pContent').test(response["body"]));
+        .append($('<p>').addClass('pContent').text(response["body"]));
     
     if(response["user_UUID"] == $.cookie("USR_ID")) {
         var del_but_id = "delete-comment-"+response["UUID"];
