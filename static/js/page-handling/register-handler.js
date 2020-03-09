@@ -17,8 +17,10 @@ $(document).ready(function() {
 
 
         formHandler(postType, postUrl, formID, function(response) {
+            alert('HELLO?');
             checkFail(response, function() {
-                url = 'http://127.0.0.1:5432/'
+                alert('HELLO');
+                var url = 'http://127.0.0.1:5432/';
                 var msgType = "info";
                 var msg = "Please verify your email address before logging in.";
                 redirectMessage(url, msgType, msg);

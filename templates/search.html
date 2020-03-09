@@ -1,8 +1,9 @@
 {% extends "layout/template.html" %}
 {% block title %}Search{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static', filename='js/page-handling/search-handler.js') }}"></script>
+{% endblock %}
 {% block content %}
-    <h1>Search: {{ search }}</h1>
-    <div class="alert alert-warning">
-        <strong>Warning!</strong> There is no database API.<br><strong>{{ search }}</strong> could not be found.
-    </div>
+    <h1>Search: {{ term }}</h1>
+    <div id="posts"></div>
 {% endblock %}

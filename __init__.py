@@ -42,9 +42,9 @@ def home():
     return render_template('home.html', sesh = request.cookies.get('S_ID'))
     
 
-@app.route('/search')
-def search():
-    return render_template('search.html', sesh = request.cookies.get('S_ID'))
+@app.route('/search/<term>')
+def search(term):
+    return render_template('search.html', term = term, sesh = request.cookies.get('S_ID'))
 
 
 @app.route('/login')
