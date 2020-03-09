@@ -19,14 +19,20 @@ $(document).ready(function() {
         e.preventDefault();
 
 		
-
+//
 
         formHandler(postType, postUrl, formID, function(response) {
             checkFail(response, function() {
-                var url = 'http://127.0.0.1:5432/';
-                var msgType = "info";
-                var msg = "Please verify your email address before logging in.";
-                redirectMessage(url, msgType, msg);
+				if (response["code"] == "success"){
+					var url = 'http://127.0.0.1:5432/';
+					var msgType = "info";
+					var msg = "Please verify your email address before logging in.";
+					redirectMessage(url, msgType, msg);
+				}else{
+                    clearMessages();
+                    message(response["code"], response["reason"]);
+					grecaptcha.reset();
+                }
             });
         });
 

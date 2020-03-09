@@ -6,20 +6,21 @@ $(document).ready(function() {
         var formID = '#password-form';
 
         formHandler(postType, postUrl, formID, function(response) {
-            //message('success', '')
-			if (response["code"] == "success"){
-				clearMessages();
-				message("success", "Password successfully changes.");
-				$('#new2_p_in').val('')
-				$('#new_p_in').val('')
-				$('#old_p_in').val('')
-			}else{
-				clearMessages();
-				message(response["code"], response["reason"]);
-				
-			}
+			checkFail(response, function() {
+				if (response["code"] == "success"){
+					clearMessages();
+					message("success", "Password successfully changed.");
+					$('#new2_p_in').val('')
+					$('#new_p_in').val('')
+					$('#old_p_in').val('')
+				}else{
+					clearMessages();
+					message(response["code"], response["reason"]);
+					grecaptcha.reset();
+				}
+			});
         });
-    })
+    });
     
     $('#delete-button').click(function(e) {
 		e.preventDefault();
