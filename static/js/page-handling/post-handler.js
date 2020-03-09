@@ -111,7 +111,7 @@ function insertPost(response) {
     var post = $('<div>').addClass('pPost container bg-white py-2 mt-3')
         .append($('<h1>').addClass('pTitle').text(unescapeText(response["heading"])))
         .append($('<h6>').addClass('pDateTime').text(response["date_posted"] + " " + response["time_posted"]))
-        .append($('<h3>').addClass('pUser').text(response["username"]))
+        .append($('<h3>').addClass('pUser').text(unescapeText(response["username"])))
         .append($('<p>').addClass('pContent').text(unescapeText(response["body"])));
 
     $('#posts').append(post);
@@ -120,8 +120,8 @@ function insertPost(response) {
 function insertComment(response, post_uuid) {
 	var comment =  $('<div>').addClass('pPost container bg-white py-2 mt-3')
         .append($('<h6>').addClass('pDateTime').text(response["date_posted"] + " " + response["time_posted"]))
-        .append($('<h3>').addClass('pUser').text(response["username"]))
-        .append($('<p>').addClass('pContent').text(response["body"]));
+        .append($('<h3>').addClass('pUser').text(unescapeText(response["username"])))
+        .append($('<p>').addClass('pContent').text(unescapeText(response["body"])));
     
     if(response["user_UUID"] == $.cookie("USR_ID")) {
         var del_but_id = "delete-comment-"+response["UUID"];
