@@ -96,7 +96,7 @@ function checkFail(response, success) {
         redirectMessage('http://127.0.0.1:5432/', response["code"], response["reason"]);
     }
     else {
-        success;
+        success();
     }
 }
 

@@ -37,7 +37,7 @@ $(document).ready(function() {
     getHandler('get', 'http://127.0.0.1:5000/post/comment/getComments?post_id=' + uuid, function(response2) {
         for(var j in response2) {
             //alert(response2[j]["username"]);
-            insertComment(response2[j]);
+            insertComment(response2[j], uuid);
         }
     });
 
@@ -51,7 +51,7 @@ $(document).ready(function() {
             var formID = '#newcomment-form';
 
             formHandler(postType, postUrl, formID, function(response2) {
-                insertComment(response2["comment"]);
+                insertComment(response2["comment"], uuid);
             });
         });
     }
@@ -76,25 +76,31 @@ function deletePostHandler(uuid){
         });
     })
 }
+//function redirectMessage(url, type, msg) {
+//    window.location.replace(url + '?msgType=' + type + '&msg=' + msg);
+//}
 
 
 
-
-function createDeleteCommentHandler(del_id, uuid){
+function createDeleteCommentHandler(del_id, comment_uuid, post_uuid){
 	$('#'+del_id).click(function() {
-		alert("sg");
         var url = 'http://127.0.0.1:5000/post/comment/deleteComment';
-		var in_data = {'comment_UUID': uuid};
+		var in_data = {'comment_UUID': comment_uuid};
 
+		//alert("comment successfully deleted");
+		
         postHandler(url, in_data, function(response){
-			if (response["code"] == "success"){
-				window.location.replace('http://127.0.0.1:5432/');
-			}else{
-				clearMessages();
-				message(response["code"], response["reason"]);
-			}
+			checkFail(response, function(){
+				if (response["code"] == "success"){
+					redirectMessage('http://127.0.0.1:5432/posts/'+post_uuid, "success", "Comment successfully deleted.");
+				}else{
+					clearMessages();
+					message(response["code"], response["reason"]);
+				}
+				
+			});
         });
-    })
+    });
 }
 
 
@@ -109,7 +115,7 @@ function insertPost(response) {
     $('#posts').append(post);
 }
 
-function insertComment(response) {
+function insertComment(response, post_uuid) {
 	var comment =  $('<div>').addClass('pPost container bg-white py-2 mt-3')
         .append($('<h6>').addClass('pDateTime').text(response["date_posted"] + " " + response["time_posted"]))
         .append($('<h3>').addClass('pUser').text(response["username"]))
@@ -121,11 +127,11 @@ function insertComment(response) {
             "class": "btn btn-secondary mt-3",
             "id": del_but_id,
             "value": response["UUID"],
-            "href": "/#"
+            "href": "#"
         }).text('Delete'));
        
     }
 
     $('#comments').append(comment);
-    createDeleteCommentHandler(del_but_id, response["UUID"]);
+    createDeleteCommentHandler(del_but_id, response["UUID"], post_uuid);
 }
