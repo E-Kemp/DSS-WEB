@@ -20,14 +20,16 @@
             <input type="password" class="form-control" name="ver_p" id="new2_p_in">
         </div>
 		<div id="captchaForm" class="g-recaptcha" data-sitekey="6LdMQ98UAAAAAHzd5zalYhhvb6XT6DOJmfutwPDn"></div>
-		<br>
-		
-        <div class="row justify-content-between mx-1">
-            <button id="pw-change-id" type="submit" class="btn btn-secondary">Change Password</button>
-            <button id="delete-button" type="button" class="btn btn-secondary">Delete Account</button>
+        <div class="row justify-content-between mt-2">
+            <button id="pw-change-id" type="submit" class="btn btn-secondary mx-3">Change Password</button>
         </div>        
     </form>
+
+    <h1 class="mt-4">Delte Account</h1>
     <form id="delete-form" method="post">
+        <div class="form-group mt-2">
+            <button name="deleteButton" id="delete-button" type="button" class="btn btn-secondary">Delete Account</button>
+        </div>
     </form>
     
 {% endblock %}

@@ -9,7 +9,7 @@ $(document).ready(function() {
                         $('<a>').attr("href", "http://127.0.0.1:5432/posts/" + response[i]["UUID"]).text(unescapeText(response[i]["heading"])))
                     )
                     .append($('<h6>').addClass('pDateTime').text(response[i]["date_posted"] + " " + response[i]["time_posted"]))
-                    .append($('<h3>').addClass('pUser').text(unescapeText(response[i]["username"])))
+                    .append($('<h5>').addClass('pUser').text(unescapeText(response[i]["username"])))
                     .append($('<p>').addClass('pContent').text(unescapeText(response[i]["body"])))
                 );
             }
