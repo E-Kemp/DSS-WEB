@@ -67,12 +67,14 @@ function deletePostHandler(uuid){
 		var in_data = {'post_UUID': uuid};
 
         postHandler(url, in_data, function(response){
-			if (response["code"] == "success"){
-				window.location.replace('http://127.0.0.1:5432/');
-			}else{
-				clearMessages();
-				message(response["code"], response["reason"]);
-			}
+            checkFail(response, function() {
+                if (response["code"] == "success"){
+                    redirectMessage('http://127.0.0.1:5432/', response["code"], "Post successfully deleted.");
+                }else{
+                    clearMessages();
+                    message(response["code"], response["reason"]);
+                }
+            });
         });
     })
 }
