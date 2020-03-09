@@ -9,7 +9,8 @@ $(document).ready(function() {
         var veri = document.forms["register"]["verifyPasswordInput"].value;
 		var password_blacklist = ["uea","pirate","cove","piratecove","password","topsecret",
 		"123", "12345","qwerty","abc",email,forename,urname,username];
-        
+        console.log(DOB);
+		if(!checkValidDOB(DOB)){return false;}
 		if(!checkValidPassword(pass,veri,password_blacklist)){return false;}
         
         var postUrl = 'http://127.0.0.1:5000/account/createUser';
@@ -39,6 +40,22 @@ $(document).ready(function() {
         return true;
     });
 }); 
+
+function checkValidDOB(DOB){
+	var toofar = new Date("1899-12-31");
+	var now = new Date();
+	var dob = new Date(DOB);
+	
+	if(dob < toofar){
+		message('warning', 'Birth date cannot be past 1899-12-31');
+		return false;
+	}
+	else if(dob > now){
+		message('warning', 'Birth date cannot be in the future');
+		return false;
+	}
+	return true;
+}
 
 
 function checkValidPassword(pass,veri,password_blacklist){
