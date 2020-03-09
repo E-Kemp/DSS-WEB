@@ -20,6 +20,12 @@ $(document).ready(function() {
         });
     })
 
+
+    $('#search-button').click(function() {
+        window.location.replace('http://127.0.0.1:5432/search/' + $("#search-term").val());
+    });
+
+
 });
 
 
@@ -116,7 +122,7 @@ function checkFail(response, success) {
         redirectMessage('http://127.0.0.1:5432/', response["code"], response["reason"]);
     }
     else {
-        success;
+        success();
     }
 }
 

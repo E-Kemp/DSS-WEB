@@ -9,7 +9,6 @@
 		<script src="{{ url_for('static', filename='js/jquery.cookie.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/page-handling/global-handler.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
-		<script src="{{ url_for('static', filename='js/page-handling/search-handler.js') }}"></script>
 		<!--script src="{{ url_for('static', filename='js/page-handling/logout-handler.js') }}"></script-->
 		
 		{% if user %}
@@ -62,10 +61,10 @@
 				</li>
 				{% endif %}
 		</ul>
-		<form class="form-inline my-2 my-lg-0" id="seach_form">
-			<input class="form-control mr-sm-2" name="search" type="text" placeholder="Search" aria-label="Search" id="search_term">
-			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-		</form>
+			<div class="form-inline my-2 my-lg-0" id="seach-form">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" id="search-term">
+				<button class="btn btn-secondary my-2 my-sm-0" type="button" id="search-button">Search</button>
+			</div>
 		</div>
 	</nav>
 
