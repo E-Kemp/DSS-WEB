@@ -10,7 +10,7 @@ $(document).ready(function() {
             if(response[i]["UUID"] == uuid) {
                 //Add the post
                 insertPost(response[i]);
-
+				console.log(response[i]);
                 //alert(response[i]["user_UUID"] + "\n" + $.cookie("USR_ID"));
 
                 //Add a delete button if necessary
@@ -101,10 +101,10 @@ function createDeleteCommentHandler(del_id, uuid){
 //Add post function
 function insertPost(response) {
     var post = $('<div>').addClass('pPost container bg-white py-2 mt-3')
-        .append($('<h1>').addClass('pTitle').html(response["heading"]))
+        .append($('<h1>').addClass('pTitle').text(unescapeText(response["heading"])))
         .append($('<h6>').addClass('pDateTime').text(response["date_posted"] + " " + response["time_posted"]))
         .append($('<h3>').addClass('pUser').text(response["username"]))
-        .append($('<p>').addClass('pContent').text(response["body"]));
+        .append($('<p>').addClass('pContent').text(unescapeText(response["body"])));
 
     $('#posts').append(post);
 }

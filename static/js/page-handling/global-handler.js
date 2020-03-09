@@ -35,6 +35,26 @@ function postHandler(reqURL, in_data, callback){
 }
 
 
+function unescapeText(text){
+	keywords = {
+            '@lt': '<', 
+            '@gt': '>', 
+            '@apos' : "'" ,  
+            '@quot' : '"' ,
+            '@amp': '&', 
+            '@bksl': '/', 
+            };
+	for(var key in keywords){
+		
+		for(var i = 0; i < String(text).search(key)+1; i++){
+			text = String(text).replace(key, keywords[key]);
+		}
+	}
+	
+	return text;
+}
+
+
 
 // Post request handler
 function formHandler(reqType, reqURL, formID, callback) {        
