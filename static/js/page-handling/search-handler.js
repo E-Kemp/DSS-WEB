@@ -10,11 +10,11 @@ $(document).ready(function() {
             for(var i in response) {
                 $('#posts').append($('<div>').addClass('pPost container bg-white py-2 mt-3')
                     .append($('<h1>').addClass('pTitle').append(
-                        $('<a>').attr("href", "http://127.0.0.1:5432/posts/" + response[i]["UUID"]).text(response[i]["heading"]))
+                        $('<a>').attr("href", "http://127.0.0.1:5432/posts/" + response[i]["UUID"]).text(unescapeText(response[i]["heading"])))
                     )
                     .append($('<h6>').addClass('pDateTime').text(response[i]["date_posted"] + " " + response[i]["time_posted"]))
-                    .append($('<h5>').addClass('pUser').text(response[i]["username"]))
-                    .append($('<p>').addClass('pContent').text(response[i]["body"]))
+                    .append($('<h5>').addClass('pUser').text(unescapeText(response[i]["username"])))
+                    .append($('<p>').addClass('pContent').text(unescapeText(response[i]["body"])))
                 );
             }
         });
