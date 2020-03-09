@@ -9,7 +9,7 @@ $(document).ready(function() {
         var veri = document.forms["register"]["verifyPasswordInput"].value;
 		var password_blacklist = ["uea","pirate","cove","piratecove","password","topsecret",
 		"123", "12345","qwerty","abc",email,forename,urname,username];
-        console.log(DOB);
+      
 		if(!checkValidDOB(DOB)){return false;}
 		if(!checkValidPassword(pass,veri,password_blacklist)){return false;}
         
@@ -41,19 +41,16 @@ $(document).ready(function() {
     });
 }); 
 
+
+
+
 function checkValidDOB(DOB){
 	var toofar = new Date("1899-12-31");
 	var now = new Date();
 	var dob = new Date(DOB);
 	
-	if(dob < toofar){
-		message('warning', 'Birth date cannot be past 1899-12-31');
-		return false;
-	}
-	else if(dob > now){
-		message('warning', 'Birth date cannot be in the future');
-		return false;
-	}
+	if(dob < toofar){message('warning', 'Birth date cannot be past 1899-12-31');return false;}
+	else if(dob > now){message('warning', 'Birth date cannot be in the future');	return false;}
 	return true;
 }
 
@@ -83,12 +80,12 @@ function checkValidPassword(pass,veri,password_blacklist){
 	var passAsAscii = convertToAsciiArr(pass);
 	var counter = 0;
 	var counterMax = 3;
-	var symbolTypes = 4;
+	var symbolTypes = 5;
 	var returner = false;
 	var j = 0;
-	var i = 0;	//!  -  / |  0 -  9 |  A  -  Z  | a  -    z | 
-	var ranges = [[41, 47], [60, 71], [101,132], [142, 172]];
-	for(i = 0; i < symbolTypes; i++){
+	var i = 0;	//!  -  / |  0 -  9 |	     |  A  -  Z  | a  -    z | 
+	var ranges = [[33, 48], [48, 58] ,[58,65],[65,91],  [97, 123]];
+	for(i = 0; i < ranges.length; i++){
 		for(j = ranges[i][0]; j  < ranges[i][1]; j++){
 			if(passAsAscii.indexOf(j)+1 > 0){
 				counter++;
@@ -97,6 +94,7 @@ function checkValidPassword(pass,veri,password_blacklist){
 			}
 		}
 	}
+	
 	
 	if(!returner){
 		message('warning', 'Password must contain at least 1 special character [! - /], one number [0 - 9], one capatalised character [A - Z] and one lower case character [a - z]');
