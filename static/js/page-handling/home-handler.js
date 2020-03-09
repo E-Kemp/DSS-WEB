@@ -21,26 +21,6 @@ $(document).ready(function() {
     // }, false)
 });
 
-function unescapeText(text){
-	keywords = {
-            '@lt': '<', 
-            '@gt': '>', 
-            '@apos' : "'" ,  
-            '@quot' : '"' ,
-            '@amp': '&', 
-            '@bksl': '/', 
-            };
-	for(var key in keywords){
-		
-		console.log(key);
-		console.log(text.search(key));
-		for(var i = 0; i < text.search(key)+1; i++){
-			text = text.replace(key, keywords[key]);
-		}
-	}
-	
-	return text;
-}
 
 
 
