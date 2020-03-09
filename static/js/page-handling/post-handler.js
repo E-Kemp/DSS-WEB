@@ -10,7 +10,6 @@ $(document).ready(function() {
             if(response[i]["UUID"] == uuid) {
                 //Add the post
                 insertPost(response[i]);
-				console.log(response[i]);
                 //alert(response[i]["user_UUID"] + "\n" + $.cookie("USR_ID"));
 
                 //Add a delete button if necessary
@@ -52,6 +51,7 @@ $(document).ready(function() {
 
             formHandler(postType, postUrl, formID, function(response2) {
                 insertComment(response2["comment"], uuid);
+				
             });
         });
     }
