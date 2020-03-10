@@ -13,7 +13,7 @@ $(document).ready(function() {
 		if(!checkValidDOB(DOB)){return false;}
 		if(!checkValidPassword(pass,veri,password_blacklist)){return false;}
         
-        var postUrl = 'http://127.0.0.1:5000/account/createUser';
+        var postUrl = API_URL+'account/createUser';
         var postType = 'post';
         var formID = '#register-form';
 
@@ -25,7 +25,7 @@ $(document).ready(function() {
         formHandler(postType, postUrl, formID, function(response) {
             checkFail(response, function() {
 				if (response["code"] == "success"){
-					var url = 'http://127.0.0.1:5432/';
+					var url = WEB_URL;
 					var msgType = "info";
 					var msg = "Please verify your email address before logging in.";
 					redirectMessage(url, msgType, msg);

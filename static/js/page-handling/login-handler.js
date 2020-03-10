@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#login-form').submit(function(e) {
         e.preventDefault();
 
-        var postUrl = 'http://127.0.0.1:5000/account/sign-in';
+        var postUrl = API_URL+'account/sign-in';
         var postType = 'POST';
         var formID = '#login-form';
 
@@ -10,7 +10,7 @@ $(document).ready(function() {
 			checkFail(response, function(){
 				//json_ret = JSON.stringify(response)
 				if (response["code"] == "success"){
-					window.location.replace('http://127.0.0.1:5432/');
+					window.location.replace(WEB_URL);
 				}else{
 					clearMessages();
 					message(response["code"], response["reason"]);
