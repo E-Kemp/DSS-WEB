@@ -5,7 +5,7 @@ $(document).ready(function() {
         var postType = 'post';
         var formID = '#password-form';
 
-        formHandler(postType, postUrl, formID, function(response) {
+        secureFormHandler(postType, postUrl, formID, function(response) {
 			checkFail(response, function() {
 						
 				var password_blacklist = ["uea","pirate","cove","piratecove","password","topsecret",
@@ -33,15 +33,18 @@ $(document).ready(function() {
         var postType = 'post';
         var formID = '#delete-form';
 
-        formHandler(postType, postUrl, formID, function(response) {
-			if (response["code"] == "success"){
-				 window.location.replace(WEB_URL)
-			}else{
-				clearMessages();
-				message(response["code"], response["reason"]);
-				
-			}
-           
+
+        secureFormHandler(postType, postUrl, formID, function(response) {
+			checkFail(response, function() {
+				if (response["code"] == "success"){
+					$.removeCookie('S_ID', { path: '/' });
+					$.removeCookie('USR_ID', { path: '/' });
+					redirectMessage(WEB_URL, "success", "Account successfully deleted.");
+				}else{
+					clearMessages();
+					message(response["code"], response["reason"]);
+				}
+			});
         });
     });
 })

@@ -7,14 +7,16 @@ $(document).ready(function() {
         var formID = '#login-form';
 
         formHandler(postType, postUrl, formID, function(response) {
-			//json_ret = JSON.stringify(response)
-			if (response["code"] == "success"){
-				window.location.replace(WEB_URL);
-			}else{
-				clearMessages();
-				message(response["code"], response["reason"]);
-				
-			}
+			checkFail(response, function(){
+				//json_ret = JSON.stringify(response)
+				if (response["code"] == "success"){
+					window.location.replace(WEB_URL);
+				}else{
+					clearMessages();
+					message(response["code"], response["reason"]);
+					
+				}
+			});
             //message('info', JSON.stringify(response));
             //;
         });

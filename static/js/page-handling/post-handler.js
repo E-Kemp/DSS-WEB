@@ -66,7 +66,7 @@ function deletePostHandler(uuid){
         var url = API_URL+'post/deletePost';
 		var in_data = {'post_UUID': uuid};
 
-        postHandler(url, in_data, function(response){
+        securePostHandler(url, in_data, function(response){
             checkFail(response, function() {
                 if (response["code"] == "success"){
                     redirectMessage(WEB_URL, response["code"], "Post successfully deleted.");
@@ -91,7 +91,7 @@ function createDeleteCommentHandler(del_id, comment_uuid, post_uuid){
 
 		//alert("comment successfully deleted");
 		
-        postHandler(url, in_data, function(response){
+        securePostHandler(url, in_data, function(response){
 			checkFail(response, function(){
 				if (response["code"] == "success"){
 					redirectMessage(WEB_URL+'posts/'+post_uuid, "success", "Comment successfully deleted.");
