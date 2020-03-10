@@ -92,10 +92,10 @@ function deletePostHandler(uuid){
 
 
 
-function createDeleteCommentHandler(del_id, comment_uuid, post_uuid){
+function deleteCommentHandler(del_id, comment_uuid, post_uuid){
 	$('#'+del_id).click(function() {
         var url = API_URL+'post/comment/deleteComment';
-		var in_data = {'comment_UUID': comment_uuid};
+		var in_data = 'comment_UUID='+comment_uuid;
 
 		//alert("comment successfully deleted");
 		
@@ -143,5 +143,5 @@ function insertComment(response, post_uuid) {
     }
 
     $('#comments').append(comment);
-    createDeleteCommentHandler(del_but_id, response["UUID"], post_uuid);
+    deleteCommentHandler(del_but_id, response["UUID"], post_uuid);
 }
