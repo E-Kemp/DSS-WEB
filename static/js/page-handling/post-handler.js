@@ -72,7 +72,7 @@ function deletePostHandler(uuid){
 
 
         var url = API_URL+'post/deletePost';
-		var in_data = {'post_UUID': uuid};
+		var in_data = 'post_UUID='+uuid;
 
         securePostHandler(url, in_data, function(response){
             checkFail(response, function() {
