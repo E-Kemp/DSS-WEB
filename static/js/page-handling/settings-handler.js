@@ -5,7 +5,7 @@ $(document).ready(function() {
         var postType = 'post';
         var formID = '#password-form';
 
-        formHandler(postType, postUrl, formID, function(response) {
+        secureFormHandler(postType, postUrl, formID, function(response) {
 			checkFail(response, function() {
 				if (response["code"] == "success"){
 					clearMessages();
@@ -29,15 +29,17 @@ $(document).ready(function() {
         var postType = 'post';
         var formID = '#delete-form';
 
-        formHandler(postType, postUrl, formID, function(response) {
-			if (response["code"] == "success"){
-				 window.location.replace('http://127.0.0.1:5432')
-			}else{
-				clearMessages();
-				message(response["code"], response["reason"]);
-				
-			}
-           
+        secureFormHandler(postType, postUrl, formID, function(response) {
+			checkFail(response, function() {
+				if (response["code"] == "success"){
+					$.removeCookie('S_ID', { path: '/' });
+					$.removeCookie('USR_ID', { path: '/' });
+					redirectMessage("http://127.0.0.1:5432", "success", "Account successfully deleted.");
+				}else{
+					clearMessages();
+					message(response["code"], response["reason"]);
+				}
+			});
         });
     });
 })

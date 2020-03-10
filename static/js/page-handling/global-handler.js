@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	
     var urlParams = new URLSearchParams(window.location.search);
 
     if(urlParams.has('msgType'))
@@ -40,6 +40,22 @@ function postHandler(reqURL, in_data, callback){
     });
 }
 
+function securePostHandler(reqURL, in_data, callback){
+	csrf_token = getCSRF();
+	formData = "token="+csrf_token+"&";
+	
+	return $.ajax({
+        type: 'POST',
+		xhrFields: { withCredentials: true },
+		crossDomain: true,
+        url: reqURL,
+        data: formData+in_data,
+        success: callback
+    });
+}
+
+
+
 
 function unescapeText(text){
 	keywords = {
@@ -62,8 +78,47 @@ function unescapeText(text){
 
 
 
+
+
+function getCSRF(){
+	token = $.ajax({
+        type: 'POST',
+		xhrFields: { withCredentials: true },
+		crossDomain: true,
+        url: "http://127.0.0.1:5000/account/getCSRF",
+        data: "",
+        async: false
+    });
+	return $.parseJSON(token.responseText)["token"];
+	
+	
+//	return postHandler("", "", function(response){/
+//		alert("in getCSRF: "+response["token"])
+//		return response["token"];
+//	});
+	//return token;
+}
+
+
+function secureFormHandler(reqType, reqURL, formID, callback) {
+	csrf_token = getCSRF();
+	formData = "token="+csrf_token+"&";
+    return $.ajax({
+        //Access-Control-Allow-Headers: x-requested-with, x-requested-by
+       // beforeSend: function(req) {
+       //     req.setRequestHeader("Access-Control-Allow-Headers", "x-requested-with, x-requested-by");
+       // },
+        type: reqType,
+		xhrFields: { withCredentials: true },
+		crossDomain: true,
+        url: reqURL,
+        data: formData+$(formID).serialize(),
+        success: callback
+    });
+}
+
 // Post request handler
-function formHandler(reqType, reqURL, formID, callback) {        
+function formHandler(reqType, reqURL, formID, callback) {
     return $.ajax({
         //Access-Control-Allow-Headers: x-requested-with, x-requested-by
        // beforeSend: function(req) {
