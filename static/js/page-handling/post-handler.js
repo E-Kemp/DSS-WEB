@@ -49,9 +49,17 @@ $(document).ready(function() {
             var postType = 'post';
             var formID = '#newcomment-form';
 
-            formHandler(postType, postUrl, formID, function(response2) {
-                insertComment(response2["comment"], uuid);
-				
+            secureFormHandler(postType, postUrl, formID, function(response2) {
+				checkFail(response2, function(){
+				//json_ret = JSON.stringify(response)
+					if (response2["code"] == "success"){
+						insertComment(response2["comment"], uuid);
+					}else{
+						clearMessages();
+						message(response2["code"], response2["reason"]);
+						
+					}
+				});
             });
         });
     }
