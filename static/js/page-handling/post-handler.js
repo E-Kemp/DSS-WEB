@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 
     // GET HANDLER
-    getHandler('get', 'http://127.0.0.1:5000/post/getPosts', function(response) {
+    getHandler('get', API_URL+'post/getPosts', function(response) {
         for(var i in response) {
             if(response[i]["UUID"] == uuid) {
                 //Add the post
@@ -33,7 +33,7 @@ $(document).ready(function() {
     
     //Comments
 
-    getHandler('get', 'http://127.0.0.1:5000/post/comment/getComments?post_id=' + uuid, function(response2) {
+    getHandler('get', API_URL+'post/comment/getComments?post_id=' + uuid, function(response2) {
         for(var j in response2) {
             //alert(response2[j]["username"]);
             insertComment(response2[j], uuid);
@@ -45,7 +45,7 @@ $(document).ready(function() {
         $('#postID').val(uuid);
         $('#newcomment-form').submit(function(e) {
             e.preventDefault();
-            var postUrl = 'http://127.0.0.1:5000/post/comment/createComment';
+            var postUrl = API_URL+'post/comment/createComment';
             var postType = 'post';
             var formID = '#newcomment-form';
 
@@ -63,13 +63,13 @@ function deletePostHandler(uuid){
         e.preventDefault();
 
 
-        var url = 'http://127.0.0.1:5000/post/deletePost';
+        var url = API_URL+'post/deletePost';
 		var in_data = {'post_UUID': uuid};
 
         postHandler(url, in_data, function(response){
             checkFail(response, function() {
                 if (response["code"] == "success"){
-                    redirectMessage('http://127.0.0.1:5432/', response["code"], "Post successfully deleted.");
+                    redirectMessage(WEB_URL, response["code"], "Post successfully deleted.");
                 }else{
                     clearMessages();
                     message(response["code"], response["reason"]);
@@ -86,7 +86,7 @@ function deletePostHandler(uuid){
 
 function createDeleteCommentHandler(del_id, comment_uuid, post_uuid){
 	$('#'+del_id).click(function() {
-        var url = 'http://127.0.0.1:5000/post/comment/deleteComment';
+        var url = API_URL+'post/comment/deleteComment';
 		var in_data = {'comment_UUID': comment_uuid};
 
 		//alert("comment successfully deleted");
@@ -94,7 +94,7 @@ function createDeleteCommentHandler(del_id, comment_uuid, post_uuid){
         postHandler(url, in_data, function(response){
 			checkFail(response, function(){
 				if (response["code"] == "success"){
-					redirectMessage('http://127.0.0.1:5432/posts/'+post_uuid, "success", "Comment successfully deleted.");
+					redirectMessage(WEB_URL+'posts/'+post_uuid, "success", "Comment successfully deleted.");
 				}else{
 					clearMessages();
 					message(response["code"], response["reason"]);

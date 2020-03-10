@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#password-form').submit(function(e) {
 		e.preventDefault();
-        var postUrl = 'http://127.0.0.1:5000/account/changePassword';
+        var postUrl = API_URL+'account/changePassword';
         var postType = 'post';
         var formID = '#password-form';
 
@@ -25,13 +25,13 @@ $(document).ready(function() {
     $('#delete-button').click(function(e) {
 		e.preventDefault();
 		
-        var postUrl = 'http://127.0.0.1:5000/account/deleteAccount';
+        var postUrl = API_URL+'account/deleteAccount';
         var postType = 'post';
         var formID = '#delete-form';
 
         formHandler(postType, postUrl, formID, function(response) {
 			if (response["code"] == "success"){
-				 window.location.replace('http://127.0.0.1:5432')
+				 window.location.replace(WEB_URL)
 			}else{
 				clearMessages();
 				message(response["code"], response["reason"]);

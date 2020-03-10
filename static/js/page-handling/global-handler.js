@@ -1,3 +1,6 @@
+var API_URL = 'http://127.0.0.1:5000/';
+var WEB_URL = 'http://127.0.0.1:5432/';
+
 $(document).ready(function() {
 
     var urlParams = new URLSearchParams(window.location.search);
@@ -9,20 +12,20 @@ $(document).ready(function() {
         e.preventDefault();
 
 		
-        var url = 'http://127.0.0.1:5000/account/sign-out';
+        var url = API_URL+'account/sign-out';
         var type = 'get';
 
         getHandler(type, url, function(response) {
             //message('info', JSON.stringify(response));
 			$.removeCookie('S_ID', { path: '/' });
 			$.removeCookie('USR_ID', { path: '/' });
-            window.location.replace('http://127.0.0.1:5432/')
+            window.location.replace(WEB_URL)
         });
     })
 
 
     $('#search-button').click(function() {
-        window.location.replace('http://127.0.0.1:5432/search/' + $("#search-term").val());
+        window.location.replace(WEB_URL+'search/' + $("#search-term").val());
     });
 
 
@@ -119,7 +122,7 @@ function redirectMessage(url, type, msg) {
 
 function checkFail(response, success) {
     if(response["code"] == "danger") {
-        redirectMessage('http://127.0.0.1:5432/', response["code"], response["reason"]);
+        redirectMessage(WEB_URL, response["code"], response["reason"]);
     }
     else {
         success();
