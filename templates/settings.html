@@ -1,24 +1,40 @@
 {% extends "layout/template.html" %}
 {% block title %}Settings{% endblock %}
 {% block extraParams %}col-4{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static', filename='js/page-handling/password-handler.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/page-handling/settings-handler.js') }}"></script>
+{% endblock %}
 {% block content %}
-    <h1>User Settings</h1>
-    <div class="alert alert-warning">
-        <strong>Warning!</strong> There is no database API.<br>There's no settings to display!!
-    </div>
-    <form action="{{ url_for('settings') }}" method="post">
+    <h1>Change Password</h1>
+    <form id="password-form" action="http://127.0.0.1:5000/account/changePassword">
         <div class="form-group">
             <label for="oldPasswordInput">Old Password</label>
-            <input type="password" class="form-control" name="oldPasswordInput">
+            <input type="password" class="form-control" name="old_p" id="old_p_in">
         </div>
         <div class="form-group">
             <label for="newPasswordInput">New Password</label>
-            <input type="password" class="form-control" name="newPasswordInput">
+            <input type="password" class="form-control" name="new_p" id="new_p_in">
         </div>
         <div class="form-group">
             <label for="verifyPasswordInput">Verify password</label>
-            <input type="password" class="form-control" name="verifyPasswordInput">
+            <input type="password" class="form-control" name="ver_p" id="new2_p_in">
         </div>
-        <button type="submit" class="btn btn-primary">Register</button>
+		<div id="captchaForm" class="g-recaptcha" data-sitekey="6LdMQ98UAAAAAHzd5zalYhhvb6XT6DOJmfutwPDn"></div>
+        <div class="row justify-content-between mt-2">
+            <button id="pw-change-id" type="submit" class="btn btn-secondary mx-3">Change Password</button>
+        </div>        
     </form>
+
+    <div class="mt-3 p-3 bg-light" style="margin-left: -15px; margin-right: -15px;"></div>
+
+    <h1 class="mt-4">Delete Account</h1>
+    <form id="delete-form" method="post">
+		<div id="captchaForm" class="g-recaptcha" data-sitekey="6LdMQ98UAAAAAHzd5zalYhhvb6XT6DOJmfutwPDn"></div>
+
+        <div id="delete-button-field" class="form-group mt-2 mb-0">
+            <button name="deleteButton" id="delete-button" type="button" class="btn btn-secondary">Delete Account</button>
+        </div>
+    </form>
+    
 {% endblock %}

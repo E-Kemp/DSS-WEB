@@ -1,14 +1,14 @@
 {% extends "layout/template.html" %}
 {% block title %}Home{% endblock %}
 {% block js %}
-    <script src="static/js/page-handling/home-handler.js"></script>
+    <script src="{{ url_for('static', filename='js/page-handling/home-handler.js') }}"></script>
 {% endblock %}
 {% block content %}
 	<div class="row justify-content-between mx-1">
 		<h1 class="">Home</h1>
 		<div class="p-0">
-			{% if user %}
-			<a class="btn btn-secondary" href="/post" role="button">New Post</a>
+			{% if sesh %}
+			<a class="btn btn-secondary" href="/newpost" role="button">New Post</a>
 			{% endif %}
 		</div>
 	</div>

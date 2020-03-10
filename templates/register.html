@@ -1,14 +1,15 @@
 {% extends "layout/template.html" %}
 {% block title %}Register{% endblock %}
 {% block js %}
-    <script src="static/js/page-handling/register-handler.js"></script>
+    <script src="{{ url_for('static', filename='js/page-handling/password-handler.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/page-handling/register-handler.js') }}"></script>
 {% endblock %}
 {% block extraParams %}col-4{% endblock %}
 {% block content %}
     <h1>Register</h1>
     <div id="errorContainer" class="alert alert-warning" style="display: none;">
     </div>
-	<form name="register" id="register-form" action="http://127.0.0.1:5000/account/createUser" method="POST">
+	<form name="register" id="register-form" action="" method="POST">
         <div class="form-group">
             <label for="usernameInput">Username</label>
             <input type="text" class="form-control" name="usernameInput" aria-describedby="usernameHelp" placeholder="Enter username" required>
@@ -37,6 +38,11 @@
             <label for="verifyPasswordInput">Verify password</label>
             <input type="password" class="form-control" name="verifyPasswordInput" placeholder="Verify password" required>
         </div>
+		
+		
+		<div class="g-recaptcha" data-sitekey="6LdMQ98UAAAAAHzd5zalYhhvb6XT6DOJmfutwPDn"></div>
+		<br>
+		
         <button id="register-button" type="submit" class="btn btn-primary">Register</button>
         <!--button type="submit" class="btn btn-primary">Register</button-->
     </form>

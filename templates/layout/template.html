@@ -5,23 +5,32 @@
 		<title>{% block title %}{% endblock %} - Pirate's Cove!</title>
 		
 		<!-- JavaScript Dependancies -->
-		<script src="static/js/jquery-3.4.1.min.js"></script>
-		<script src="static/js/bootstrap.bundle.js"></script>
-		{% block js %}{% endblock %}
+		<script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jquery.cookie.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/page-handling/global-handler.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/bootstrap.bundle.js') }}"></script>
+		<!--script src="{{ url_for('static', filename='js/page-handling/logout-handler.js') }}"></script-->
+		
+		{% if user %}
+		
+		{% endif %}
+		{% block js %}
+		{% endblock %}
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 		
 		<!-- CSS Files -->
-		<link rel="stylesheet" href="static/css/bootstrap-custom.css">
-		<link rel="stylesheet" href="static/css/stylesheet.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-custom.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
 
 
-		<link rel="icon" href="static/images/icon.png">
+		<link rel="icon" href="{{ url_for('static', filename='images/icon.png') }}">
 	</head>
 	<body class="bg-light">
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-dark">
 		<a class="navbar-brand" href="/home">
-			<img src="static/images/logo3.png" alt="">
+			<img src="{{ url_for('static', filename='images/logo3.png') }}" alt="">
 		</a>
 		<a class="navbar-brand" href="/home">The Pirate Cove</a>
 		<!-- Navbar toggle button for smaller displays -->
@@ -33,12 +42,12 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/home">Home</a>
 				</li>
-				{% if user %}
+				{% if sesh %}
 				<li class="nav-item">
 					<a class="nav-link" href="/newpost">Post</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/logout">Logout</a>
+					<a id="logout-button" class="nav-link" href="#">Logout</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/settings">Settings</a>
@@ -47,17 +56,20 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/login">Login</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/register">Register</a>
+				</li>
 				{% endif %}
 		</ul>
-		<form action="{{ url_for('search') }}" method="post" class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" name="search" type="text" placeholder="Search" aria-label="Search">
-			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-		</form>
+			<div class="form-inline my-2 my-lg-0" id="seach-form">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search" id="search-term">
+				<button class="btn btn-secondary my-2 my-sm-0" type="button" id="search-button">Search</button>
+			</div>
 		</div>
 	</nav>
 
-
-	<div id="main" class="container bg-dark py-3 my-3 {% block extraParams %}{% endblock %}">
+	<!-- Using a dirty margin at the bottom to deal with the issue of the footer..... -->
+	<div id="main" class="container bg-dark py-3 mt-3 {% block extraParams %}{% endblock %}" style="margin-bottom: 126px">
 		{% block content %}{% endblock %}
 	</div>
 
