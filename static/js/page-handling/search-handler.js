@@ -1,10 +1,12 @@
 $(document).ready(function() {
+    // Get the search term from the URL
     var path = window.location.pathname.split('/');
     var search_term = path[path.length - 1];
 
-    var postUrl = API_URL+'post/search?search_term='+search_term;
+    var postUrl = API_URL + 'post/search?search_term=' + search_term;
     var postType = 'get';
 
+    // Get request for all posts that match the search term
     getHandler(postType, postUrl, function(response) {
         checkFail(response, function() {
             for(var i in response) {
@@ -19,4 +21,4 @@ $(document).ready(function() {
             }
         });
     });
-})
+});

@@ -6,20 +6,18 @@ $(document).ready(function() {
         var postType = 'POST';
         var formID = '#newpost-form';
 
+        // Send the secure form to create a new post
         secureFormHandler(postType, postUrl, formID, function(response) {
-			checkFail(response, function(){
+			checkFail(response, function() {
 				if (response["code"] == "success"){
-					window.location.replace(WEB_URL+'posts/'+response["post"]["UUID"]);
-				}else{
+					window.location.replace(WEB_URL + 'posts/' + response["post"]["UUID"]);
+                } 
+                else {
 					clearMessages();
 					message(response["code"], response["reason"]);
 					
 				}
 			});	
-            //message('info', JSON.stringify(response));
-
-            //window.location.replace('http://127.0.0.1:5432/');
         });
-    })
-    
-})
+    }); 
+});

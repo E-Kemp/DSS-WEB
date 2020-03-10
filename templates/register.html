@@ -1,7 +1,8 @@
 {% extends "layout/template.html" %}
 {% block title %}Register{% endblock %}
 {% block js %}
-    <script src="static/js/page-handling/register-handler.js"></script>
+    <script src="{{ url_for('static', filename='js/page-handling/password-handler.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/page-handling/register-handler.js') }}"></script>
 {% endblock %}
 {% block extraParams %}col-4{% endblock %}
 {% block content %}

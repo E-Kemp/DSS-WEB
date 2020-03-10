@@ -6,20 +6,17 @@ $(document).ready(function() {
         var postType = 'POST';
         var formID = '#login-form';
 
+        // Send the post request to sign in
         formHandler(postType, postUrl, formID, function(response) {
 			checkFail(response, function(){
-				//json_ret = JSON.stringify(response)
 				if (response["code"] == "success"){
-					window.location.replace(WEB_URL);
-				}else{
+					redirectMessage(WEB_URL, 'success', 'You have logged in!');
+                }
+                else {
 					clearMessages();
 					message(response["code"], response["reason"]);
-					
 				}
 			});
-            //message('info', JSON.stringify(response));
-            //;
         });
-    })
-    
-})
+    });
+});

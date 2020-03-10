@@ -3,36 +3,39 @@ $(document).ready(function() {
     var path = window.location.pathname.split('/');
     var uuid = path[path.length - 1];
 
-
-    // GET HANDLER
-    getHandler('get', API_URL+'post/getPosts', function(response) {
+    // Get post with asynchronisation turned off
+    // - Allows the JavaScript to check the content after the request is completed
+    getNoSyncHandler('get', API_URL + 'post/getPosts', function(response) {
         for(var i in response) {
             if(response[i]["UUID"] == uuid) {
                 //Add the post
                 insertPost(response[i]);
-                //alert(response[i]["user_UUID"] + "\n" + $.cookie("USR_ID"));
 
                 //Add a delete button if necessary
                 if(response[i]["user_UUID"] == $.cookie("USR_ID")) {
                     $('#posts').append($('<a>').attr({
-                        "class": "btn btn-secondary mt-3",
+                        "class": "btn btn-secondary mt-3 mx-3",
 						"id": "delete-post",
                         "href": "#",
-                    }).text('Delete'));
+                    }).text('Delete Post'));
 					deletePostHandler(uuid);
                 }
                 else {
                 }
 
-
                 break;
             }
         }
+        
+        // If there is nothing returned, redirect to home with an error message
+        if(!$('#posts').has('.pPost').length) {
+            redirectMessage(WEB_URL, 'warning', 'Invalid URL argument!');
+        }
+        
     });
 
     
     //Comments
-
     getHandler('get', API_URL+'post/comment/getComments?post_id=' + uuid, function(response2) {
         for(var j in response2) {
             //alert(response2[j]["username"]);
@@ -65,6 +68,7 @@ $(document).ready(function() {
     }
 });
 
+// Handler for deleting posts
 function deletePostHandler(uuid){
     //delete post listner
 	$('#delete-post').click(function(e) {
@@ -86,12 +90,9 @@ function deletePostHandler(uuid){
         });
     })
 }
-//function redirectMessage(url, type, msg) {
-//    window.location.replace(url + '?msgType=' + type + '&msg=' + msg);
-//}
 
 
-
+// Handler for deleting comments
 function deleteCommentHandler(del_id, comment_uuid, post_uuid){
 	$('#'+del_id).click(function() {
         var url = API_URL+'post/comment/deleteComment';
@@ -114,7 +115,7 @@ function deleteCommentHandler(del_id, comment_uuid, post_uuid){
 }
 
 
-//Add post function
+// Add post function
 function insertPost(response) {
     var post = $('<div>').addClass('pPost container')
         .append($('<h1>').addClass('pTitle').text(unescapeText(response["heading"])))
@@ -125,8 +126,9 @@ function insertPost(response) {
     $('#posts').prepend(post);
 }
 
+// Add comment function
 function insertComment(response, post_uuid) {
-	var comment =  $('<div>').addClass('pPost bg-light p-3 m-2')
+	var comment =  $('<div>').addClass('pPost bg-light p-3')
         .append($('<h6>').addClass('pDateTime').text(response["date_posted"] + " " + response["time_posted"]))
         .append($('<h5>').addClass('pUser').text(unescapeText(response["username"])))
         .append($('<p>').addClass('pContent').text(unescapeText(response["body"])));
@@ -134,11 +136,11 @@ function insertComment(response, post_uuid) {
     if(response["user_UUID"] == $.cookie("USR_ID")) {
         var del_but_id = "delete-comment-"+response["UUID"];
         comment.append($('<a>').attr({
-            "class": "btn btn-secondary mt-3",
+            "class": "btn btn-secondary",
             "id": del_but_id,
             "value": response["UUID"],
             "href": "#"
-        }).text('Delete'));
+        }).text('Delete Comment'));
        
     }
 
