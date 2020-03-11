@@ -42,9 +42,9 @@ def home():
     return render_template('home.html', sesh = request.cookies.get('S_ID'))
     
 
-@app.route('/search/<term>')
-def search(term):
-    return render_template('search.html', term = term, sesh = request.cookies.get('S_ID'))
+@app.route('/search')
+def search():
+    return render_template('search.html', sesh = request.cookies.get('S_ID'))
 
 
 @app.route('/login')
@@ -62,9 +62,9 @@ def newpost():
     return render_template('newpost.html', sesh = request.cookies.get('S_ID'))
 
 
-@app.route('/posts/<uuid>')
-def profile(uuid):
-    return render_template('post.html', uuid = uuid, sesh = request.cookies.get('S_ID'))
+@app.route('/posts')
+def profile():
+    return render_template('post.html', sesh = request.cookies.get('S_ID'))
 
 
 @app.route('/settings')

@@ -1,7 +1,10 @@
 $(document).ready(function() { 
     // Get the post ID
-    var path = window.location.pathname.split('/');
-    var uuid = path[path.length - 1];
+    var urlParams = new URLSearchParams(window.location.search);
+    var uuid = "";
+    if(urlParams.has('postID')) {
+        uuid = urlParams.get('postID');
+    }
 
     // Get post with asynchronisation turned off
     // - Allows the JavaScript to check the content after the request is completed

@@ -4,6 +4,6 @@
     <script src="{{ url_for('static', filename='js/page-handling/search-handler.js') }}"></script>
 {% endblock %}
 {% block content %}
-    <h1>Search: {{ term }}</h1>
+    <h1>Search: <span id="#term"></span></h1>
     <div id="posts"></div>
 {% endblock %}

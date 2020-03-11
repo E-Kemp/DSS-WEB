@@ -28,7 +28,7 @@ $(document).ready(function() {
 
     // Add a search button handler
     $('#search-button').click(function() {
-        window.location.replace(WEB_URL+'search/' + $("#search-term").val());
+        window.location.replace(WEB_URL+'search?search=' + $("#search-term").val());
     });
 
 
