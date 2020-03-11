@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    checkCookie();
+
     $('#newpost-form').submit(function(e) {
         e.preventDefault();
 

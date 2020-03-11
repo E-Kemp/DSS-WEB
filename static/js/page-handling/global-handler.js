@@ -30,7 +30,7 @@ $(document).ready(function() {
     $('#search-button').click(function() {
         window.location.replace(WEB_URL+'search?search=' + $("#search-term").val());
     });
-
+S
 
 });
 
@@ -117,6 +117,12 @@ function getNoSyncHandler(reqType, reqURL, callback) {
 
 // ----- Miscellaneous global functions ----- //
 
+// Check the user's cookies for an S_ID, this is for usability, a fake cookie won't let the user post things etc
+function checkCookie() {
+    if($.cookie('S_ID') == null)
+        redirectMessage(WEB_URL, 'danger', 'You are not logged in!');
+}
+
 // Unescape text that is escaped in the API for display
 function unescapeText(text){
 	keywords = {
@@ -170,7 +176,7 @@ function messageText(type, message) {
     switch(type) {
         case 'warning': return '<strong>Warning!</strong> ' + message;
         case 'success': return '<strong>Success!</strong> ' + message;
-        case 'info': return '<strong>Intormation!</strong> ' + message;
+        case 'info': return '<strong>Information!</strong> ' + message;
         case 'danger': return '<strong>Fail!</strong> ' + message;
     }
 }

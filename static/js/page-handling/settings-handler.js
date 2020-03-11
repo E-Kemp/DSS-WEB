@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    checkCookie();
+
     // Password form handler
     $('#password-form').submit(function(e) {
 		e.preventDefault();
